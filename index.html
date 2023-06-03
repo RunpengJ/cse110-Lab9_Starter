@@ -102,6 +102,89 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    
+    errorBtns[0].addEventListener('click', () => {
+      console.log('console log');
+    });
+    errorBtns[1].addEventListener('click', () => {
+      console.error('error');
+    });
+    let count = 0;
+    errorBtns[2].addEventListener('click', () => {
+      count++;
+      console.log(`console count ${count}`);
+    });
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('warn');
+    });
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(false, 'assert');
+    });
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(errorBtns[6]);
+    });
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(errorBtns[7]);
+    });
+    errorBtns[8].addEventListener('click', () => {
+        console.group();
+    });
+    errorBtns[9].addEventListener('click', () => {
+        console.groupEnd();
+    });
+    errorBtns[10].addEventListener('click', () => {
+      console.table(['1234', 'Jack', 'Robert']);
+    });
+    errorBtns[11].addEventListener('click', () => {
+      console.log('Timer starts')
+      console.time("Timer");
+    });
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd("Timer");
+    });
+    errorBtns[13].addEventListener('click', () => {
+      console.trace();
+    });
+
+    class TypeError extends Error {
+      constructor(inputType) {
+        super("TypeError");
+        this.cause = inputType;
+        this.name = 'TypeError';
+      }
+    }
+
+    function validateInput (input) {
+      if (typeof(input) != 'number') {
+        throw new TypeError(typeof input);
+      }
+      if (input == 0) {
+        throw new Error('Divid by 0');
+      }
+    }
+
+    function splitCake(numOfPerson) {
+      try {
+        validateInput(numOfPerson);
+        console.log(`You will get ${1 / numOfPerson} cake.`);
+      } catch (error) {
+        if (error instanceof TypeError) {
+          console.log(`${error.name} caused by ${error.cause}`);
+        } else {
+          console.error(error);
+        }
+      }
+    }
+    errorBtns[14].addEventListener('click', () => {
+      splitCake(false);
+      splitCake(0);
+      splitCake(3);
+    });
+
+
   </script>
 </body>
 
